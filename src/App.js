@@ -1,9 +1,16 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import { Switch, Layout, Typography, Space } from "antd";
+import { Route, Link, Routes, BrowserRouter } from "react-router-dom";
+import { Layout, Typography, Space } from "antd";
 
-import { Navbar, Exchanges, Homepage, Cryptodetails, Cryptocurrencies, News } from "./components";
-import './App.css'
+import {
+  Navbar,
+  Exchanges,
+  Homepage,
+  Cryptodetails,
+  Cryptocurrencies,
+  News,
+} from "./components";
+import "./App.css";
 
 const App = () => {
   return (
@@ -15,27 +22,31 @@ const App = () => {
       <div className="main">
         <Layout>
           <div className="routes">
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route exact path="/exchanges">
-                <Exchanges />
-              </Route>
-              <Route exact path="/cryptocurrencies">
-                <Cryptocurrencies />
-              </Route>
-              <Route exact path="/crypto/:coinId">
-                <Cryptodetails />
-              </Route>
-              <Route exact path="/news">
-                <News />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route exact index element={<Homepage />} />
+              <Route exact path="exchanges" element={<Exchanges />} />
+              <Route
+                exact
+                path="cryptocurrencies"
+                element={<Cryptocurrencies />}
+              />
+              <Route exact path="crypto/:coinId" element={<Cryptodetails />} />
+              <Route exact path="news" element={<News />} />
+            </Routes>
           </div>
         </Layout>
+        <div className="footer" level={5}>
+          <Typography.Title style={{ color: "white", textAlign: "center" }}>
+            Cryptoverse <br />
+            All rights reserved
+          </Typography.Title>
+          <Space>
+            <Link to="/"> Home </Link>
+            <Link to="/exchanges"> Exchanges </Link>
+            <Link to="/news"> News </Link>
+          </Space>
+        </div>
       </div>
-      <div className="footer"></div>
     </div>
   );
 };
